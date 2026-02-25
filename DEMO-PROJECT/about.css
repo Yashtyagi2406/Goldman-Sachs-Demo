@@ -1,0 +1,61 @@
+/* Importing core styles could be done, but for separate files we repeat the base logic */
+:root {
+    --primary-color: #0F172A;
+    --gold-accent: #C5A059;
+    --white: #ffffff;
+    --text-dark: #334155;
+    --font-main: 'Inter', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font-main); color: var(--text-dark); background: #f8fafc; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* REPEAT NAV & FOOTER FOR CONSISTENCY (Simplified for brevity) */
+.navbar { background: var(--white); padding: 1rem 0; border-bottom: 1px solid #e2e8f0; }
+.nav-container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.25rem; font-weight: 600; color: var(--primary-color); text-transform: uppercase; text-decoration: none; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { color: var(--text-dark); text-decoration: none; font-weight: 500; }
+.nav-links a.active { color: var(--gold-accent); }
+footer { background: var(--primary-color); color: var(--white); padding: 2rem 0; text-align: center; margin-top: auto; }
+
+/* PAGE HEADER */
+.page-header {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 6rem 0 4rem;
+}
+.page-header h1 {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+}
+
+/* TWO COL CONTENT */
+.content-section { padding: 4rem 0; }
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+.text-block h2 {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+.text-block p { font-size: 1.1rem; line-height: 1.7; color: #475569; }
+.image-block img { width: 100%; border-radius: 4px; }
+
+/* STATS */
+.stats-section { background: var(--white); padding: 4rem 0; border-top: 1px solid #e2e8f0; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center; }
+.stat h3 { font-size: 3rem; color: var(--primary-color); font-weight: 300; margin-bottom: 0.5rem; }
+.stat p { font-weight: 600; color: var(--gold-accent); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+
+@media (max-width: 768px) {
+    .two-col { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+}

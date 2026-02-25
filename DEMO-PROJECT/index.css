@@ -1,0 +1,200 @@
+/* GLOBAL RESETS & VARIABLES */
+:root {
+    --primary-color: #0F172A; /* Deep Navy */
+    --accent-color: #7dd3fc; /* Light Blue Accent */
+    --gold-accent: #C5A059; /* Muted Gold */
+    --text-dark: #334155;
+    --text-light: #94a3b8;
+    --white: #ffffff;
+    --font-main: 'Inter', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-dark);
+    line-height: 1.6;
+    background-color: #f8fafc;
+}
+
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+ul { list-style: none; }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* NAVIGATION */
+.navbar {
+    background: var(--white);
+    padding: 1rem 0;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.nav-links { display: flex; gap: 2rem; }
+
+.nav-links a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--gold-accent);
+}
+
+.menu-toggle { display: none; cursor: pointer; font-size: 1.5rem; }
+
+/* HERO SECTION */
+.hero {
+    height: 80vh;
+    background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.6); /* Navy Overlay */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: var(--white);
+    max-width: 700px;
+}
+
+.hero-content h1 {
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.btn {
+    padding: 12px 28px;
+    border: 1px solid var(--white);
+    color: var(--white);
+    font-weight: 500;
+    display: inline-block;
+}
+
+.btn:hover {
+    background: var(--white);
+    color: var(--primary-color);
+}
+
+/* INSIGHTS GRID */
+.insights { padding: 4rem 0; }
+.section-title {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: var(--white);
+    border: 1px solid #e2e8f0;
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body { padding: 1.5rem; }
+
+.category {
+    font-size: 0.75rem;
+    color: var(--gold-accent);
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.read-more {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-top: 1rem;
+    display: block;
+}
+
+/* FOOTER */
+footer {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 3rem 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-col h4 { margin-bottom: 1rem; font-family: var(--font-serif); }
+.footer-col p { font-size: 0.9rem; opacity: 0.7; }
+.footer-col.links a {
+    color: var(--white);
+    opacity: 0.7;
+    margin-left: 1.5rem;
+    font-size: 0.9rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2.5rem; }
+    .nav-links { display: none; }
+    .menu-toggle { display: block; }
+    .footer-content { flex-direction: column; text-align: center; }
+    .footer-col.links a { margin: 0 0.5rem; }
+}
