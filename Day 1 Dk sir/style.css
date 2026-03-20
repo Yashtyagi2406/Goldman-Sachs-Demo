@@ -1,0 +1,10 @@
+.label-input{
+            color: rgb(41, 41, 70);
+            font-family: cursive;
+        }
+
+/* @media (max-width:600px){
+    .label-input{
+        color: red;
+    }
+} */

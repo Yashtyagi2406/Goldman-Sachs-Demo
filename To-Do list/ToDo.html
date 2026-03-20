@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="ToDo.css">
+</head>
+
+<body>
+
+  <div class="card">
+
+    <!-- Header -->
+    <div class="card-header">
+      <div class="icon">✦</div>
+      <h2>My Tasks</h2>
+      <span class="task-count" id="count">0 tasks</span>
+    </div>
+
+    <!-- Input Row -->
+    <div class="input-row">
+      <input id="task" class="task-input" placeholder="What needs to be done?" autocomplete="off">
+      <button id="add-btn" class="add-btn" onclick="addTask()">Add</button>
+    </div>
+
+    <!-- Task List -->
+    <ul id="list" class="task-list"></ul>
+    <p class="empty-state">✦ Nothing here yet — add your first task!</p>
+
+    <!-- Footer -->
+    <div class="card-footer">
+      <span class="footer-info" id="done-count">0 completed</span>
+      <button class="clear-btn" onclick="clearAll()">Clear all</button>
+    </div>
+
+  </div>
+
+  <script>
+    const list      = document.getElementById("list");
+    const taskInput = document.getElementById("task");
+    const countEl   = document.getElementById("count");
+    const doneEl    = document.getElementById("done-count");
+
+    function updateCount() {
+      const total    = list.querySelectorAll(".task-item").length;
+      const done     = list.querySelectorAll(".task-item.done").length;
+      countEl.textContent = total === 1 ? "1 task" : `${total} tasks`;
+      doneEl.textContent  = done === 1  ? "1 completed" : `${done} completed`;
+    }
+
+    function addTask() {
+      const value = taskInput.value.trim();
+      if (!value) {
+        taskInput.focus();
+        taskInput.classList.add("shake");
+        setTimeout(() => taskInput.classList.remove("shake"), 400);
+        return;
+      }
+
+      const li = document.createElement("li");
+      li.className = "task-item";
+
+      li.innerHTML = `
+        <span class="check">✓</span>
+        <span class="task-text">${escapeHTML(value)}</span>
+        <button class="delete-btn" title="Delete task">✕</button>
+      `;
+
+      // Toggle done on click (except delete btn)
+      li.addEventListener("click", (e) => {
+        if (e.target.classList.contains("delete-btn")) return;
+        li.classList.toggle("done");
+        updateCount();
+      });
+
+      // Delete single task
+      li.querySelector(".delete-btn").addEventListener("click", (e) => {
+        e.stopPropagation();
+        li.style.transition = "opacity 0.2s, transform 0.2s";
+        li.style.opacity    = "0";
+        li.style.transform  = "translateX(20px)";
+        setTimeout(() => { li.remove(); updateCount(); }, 200);
+      });
+
+      list.appendChild(li);
+      taskInput.value = "";
+      taskInput.focus();
+      updateCount();
+    }
+
+    function clearAll() {
+      if (!list.children.length) return;
+      [...list.children].forEach((li, i) => {
+        setTimeout(() => {
+          li.style.transition = "opacity 0.18s, transform 0.18s";
+          li.style.opacity    = "0";
+          li.style.transform  = "translateX(16px)";
+        }, i * 45);
+      });
+      setTimeout(() => { list.innerHTML = ""; updateCount(); }, list.children.length * 45 + 200);
+    }
+
+    // Allow Enter key to add task
+    taskInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") addTask();
+    });
+
+    // Prevent XSS
+    function escapeHTML(str) {
+      return str.replace(/[&<>"']/g, (c) =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
+      );
+    }
+
+    updateCount();
+  </script>
+
+</body>
+</html>

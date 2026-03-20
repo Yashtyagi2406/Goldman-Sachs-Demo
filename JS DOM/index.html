@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=sc, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <button id="btn">Click Me!</button>
+    <script>
+    const myBtn = document.getElementById("btn");
+    myBtn.addEventListener("click", function() {
+        myBtn.innerText = "Clicked!";
+        myBtn.style.backgroundColor = "lightblue";
+        myBtn.disabled = true;
+        document.body.style.backgroundColor = "black";
+        localStorage.setItem("Name", "Yash Tyagi");
+        console.log(localStorage.getItem("Name"));
+    });
+    </script>
+</body>
+</html>
